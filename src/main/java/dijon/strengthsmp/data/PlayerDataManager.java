@@ -36,6 +36,10 @@ public class PlayerDataManager {
         masterPlayerData.get(p).setStrength(strength);
     }
 
+    public static void incStrength(Player p){
+        masterPlayerData.get(p).incStrength();
+    }
+
     public static int getStrength(Player p){
         return masterPlayerData.get(p).getStrength();
     }

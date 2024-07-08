@@ -2,6 +2,7 @@ package dijon.strengthsmp;
 
 import dijon.strengthsmp.commands.strength;
 import dijon.strengthsmp.crafting.RandomBook;
+import dijon.strengthsmp.crafting.StrengthItem;
 import dijon.strengthsmp.data.PlayerDataManager;
 import dijon.strengthsmp.handlers.AttackHandler;
 import dijon.strengthsmp.handlers.JoinLeaveHandler;
@@ -20,6 +21,7 @@ public final class StrengthSMP extends JavaPlugin {
         new TestRunnable().runTaskTimer(this, 1, 10);
 
         new RandomBook(this);
+        new StrengthItem(this);
 
         this.getCommand("strength").setExecutor(new strength());
     }
