@@ -52,6 +52,13 @@ public class PlayerDataManager {
         masterPlayerData.get(p).incPlayerHits();
     }
 
+    public static void resetUltTime(Player p){
+        masterPlayerData.get(p).lastUltActivation = System.currentTimeMillis();
+    }
+
+
+
+
     public static PlayerData getPlayerData(Player p){
         return masterPlayerData.get(p);
     }

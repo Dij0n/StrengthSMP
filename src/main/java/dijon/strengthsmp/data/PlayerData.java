@@ -18,21 +18,34 @@ public class PlayerData {
 
     public int playerHits;
 
+    public double lastUltActivation;
+
     public PlayerData(Player player) {
         this.player = player;
         this.strength = 2;
         this.basicAttack = getRandomBasicAttack();
         this.ultimateAttack = null;
-        playerHits = 0;
+        this.playerHits = 0;
+        this.lastUltActivation = 0;
     }
 
 
     public void incStrength(){
-        if(strength < 3) strength++;
+        if(strength < 3){
+            strength++;
+        }else{
+            if(ultimateAttack == null){
+                ultimateAttack = getRandomUltimateAttack();
+                player.sendMessage(ultimateAttack);
+            }
+        }
     }
 
     public void decStrength(){
         if(strength > 1) strength--;
+        if(strength != 3){
+            ultimateAttack = null;
+        }
     }
 
 

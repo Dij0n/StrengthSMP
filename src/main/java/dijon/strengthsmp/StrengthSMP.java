@@ -1,5 +1,6 @@
 package dijon.strengthsmp;
 
+import dijon.strengthsmp.commands.attack;
 import dijon.strengthsmp.commands.strength;
 import dijon.strengthsmp.crafting.RandomBook;
 import dijon.strengthsmp.crafting.StrengthItem;
@@ -24,6 +25,7 @@ public final class StrengthSMP extends JavaPlugin {
         new StrengthItem(this);
 
         this.getCommand("strength").setExecutor(new strength());
+        this.getCommand("attack").setExecutor(new attack());
     }
 
     @Override

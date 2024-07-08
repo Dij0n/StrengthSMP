@@ -1,6 +1,7 @@
 package dijon.strengthsmp.handlers;
 
 import dijon.strengthsmp.StrengthSMP;
+import dijon.strengthsmp.crafting.StrengthItem;
 import dijon.strengthsmp.data.PlayerData;
 import dijon.strengthsmp.data.PlayerDataManager;
 import org.bukkit.Bukkit;
@@ -10,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class AttackHandler implements Listener {
 
@@ -41,6 +43,9 @@ public class AttackHandler implements Listener {
             if(killerData.getStrength() <= victimData.getStrength() && victimData.getStrength() != 1){
                 killerData.incStrength();
             }
+        }else{
+            ItemStack item = StrengthItem.strengthItem;
+            victim.getWorld().dropItemNaturally(victim.getLocation(), item);
         }
 
         victimData.decStrength();

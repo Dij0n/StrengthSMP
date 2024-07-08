@@ -15,9 +15,10 @@ import static org.bukkit.Bukkit.getServer;
 public class StrengthItem {
 
     public static ShapedRecipe recipe;
+    public static ItemStack strengthItem;
 
     public StrengthItem(StrengthSMP plugin){
-        ItemStack strengthItem = new ItemStack(Material.GHAST_TEAR);
+        strengthItem = new ItemStack(Material.GHAST_TEAR);
         ItemMeta meta = strengthItem.getItemMeta();
         if (meta != null) {
             meta.setDisplayName("Strength");
