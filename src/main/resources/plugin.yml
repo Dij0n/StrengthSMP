@@ -1,0 +1,7 @@
+name: StrengthSMP
+version: '${project.version}'
+main: dijon.strengthsmp.StrengthSMP
+api-version: '1.21'
+commands:
+  strength:
+    usage: /strength
