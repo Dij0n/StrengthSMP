@@ -1,12 +1,18 @@
 package dijon.strengthsmp.data;
 
+import dijon.strengthsmp.handlers.MythicHandler;
+import org.bukkit.ChatColor;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class PlayerData {
 
     public Player player;
+
+    public UUID uuid;
 
     public int strength;
 
@@ -22,6 +28,15 @@ public class PlayerData {
 
     public PlayerData(Player player) {
         this.player = player;
+        this.uuid = player.getUniqueId();
+        this.strength = 2;
+        this.basicAttack = getRandomBasicAttack();
+        this.ultimateAttack = null;
+        this.playerHits = 0;
+        this.lastUltActivation = 0;
+    }
+
+    public PlayerData() {
         this.strength = 2;
         this.basicAttack = getRandomBasicAttack();
         this.ultimateAttack = null;
@@ -33,12 +48,12 @@ public class PlayerData {
     public void incStrength(){
         if(strength < 3){
             strength++;
-        }else{
-            if(ultimateAttack == null){
-                ultimateAttack = getRandomUltimateAttack();
-                player.sendMessage(ultimateAttack);
-            }
         }
+        if(strength == 3 && ultimateAttack == null){
+            ultimateAttack = getRandomUltimateAttack();
+            player.sendMessage(ChatColor.GREEN + "Your new ultimate attack is " + ChatColor.DARK_GREEN + ultimateAttack);
+        }
+        player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1 + strength);
     }
 
     public void decStrength(){
@@ -46,6 +61,7 @@ public class PlayerData {
         if(strength != 3){
             ultimateAttack = null;
         }
+        player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1 + strength);
     }
 
 
@@ -62,6 +78,7 @@ public class PlayerData {
     public void incPlayerHits() {
         playerHits++;
         if(playerHits >= 5){
+            MythicHandler.mythicBasicAttack(player, basicAttack);
             playerHits = 0;
         }
     }
@@ -100,6 +117,7 @@ public class PlayerData {
 
     public String getDifferentUltimateAttack(){
         String attack = ultimateAttack;
+        if(attack == null) attack = PlayerDataManager.ULTIMATE_ATTACKS[random.nextInt(PlayerDataManager.BASIC_ATTACKS.length)];
         while(attack.equals(ultimateAttack)){
             attack = PlayerDataManager.ULTIMATE_ATTACKS[random.nextInt(PlayerDataManager.BASIC_ATTACKS.length)];
         }

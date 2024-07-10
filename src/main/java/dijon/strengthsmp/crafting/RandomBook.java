@@ -2,8 +2,11 @@ package dijon.strengthsmp.crafting;
 
 import dijon.strengthsmp.StrengthSMP;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
@@ -20,10 +23,12 @@ public class RandomBook {
         ItemStack randomizer = new ItemStack(Material.BOOK);
         ItemMeta meta = randomizer.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName("Randomizer");
+            meta.setDisplayName(ChatColor.AQUA + "Randomizer");
             List<String> lore = new ArrayList<>();
-            lore.add("this book to reroll your attacks!");
+            lore.add(ChatColor.BLUE + "Use this book to reroll your attacks!");
             meta.setLore(lore);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            meta.addEnchant(Enchantment.BINDING_CURSE,1 , true);
             meta.setCustomModelData(7);
             randomizer.setItemMeta(meta);
         }
@@ -32,7 +37,7 @@ public class RandomBook {
         recipe.shape(new String[] { "PEP", "EME", "PEP" });
         recipe.setIngredient('E', Material.ECHO_SHARD);
         recipe.setIngredient('P', Material.PHANTOM_MEMBRANE);
-        recipe.setIngredient('M', Material.ENCHANTING_TABLE);
+        recipe.setIngredient('M', Material.MUSIC_DISC_5);
 
         getServer().addRecipe(recipe);
     }

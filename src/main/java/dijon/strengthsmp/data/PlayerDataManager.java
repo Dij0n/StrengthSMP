@@ -1,6 +1,7 @@
 package dijon.strengthsmp.data;
 
 import dijon.strengthsmp.StrengthSMP;
+import dijon.strengthsmp.handlers.JoinLeaveHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class PlayerDataManager {
 
@@ -70,10 +72,17 @@ public class PlayerDataManager {
         }
     }
 
+    public static void addPlayer(PlayerData save){
+        if(!masterPlayerData.containsValue(save)){
+            masterPlayerData.put(save.player, save);
+        }
+    }
+
     public static void savePlayers(){
         YamlConfiguration config = YamlConfiguration.loadConfiguration(playerDataFile);
 
         for(PlayerData save : masterPlayerData.values()){
+
             config.set(save.player.getUniqueId() + ".strength", save.strength);
             config.set(save.player.getUniqueId() + ".basicAttack", save.basicAttack);
             config.set(save.player.getUniqueId() + ".ultimateAttack", save.ultimateAttack);
@@ -97,11 +106,13 @@ public class PlayerDataManager {
 
         masterPlayerData = new HashMap<>();
         for(String uuid : config.getKeys(false)){
-            PlayerData playerData = new PlayerData(Bukkit.getPlayer(uuid));
+            PlayerData playerData = new PlayerData();
+
+            playerData.uuid = UUID.fromString(uuid);
             playerData.strength = config.getInt(uuid + ".strength", 2);
             playerData.basicAttack = config.getString(uuid + ".basicAttack", playerData.getRandomBasicAttack());
             playerData.ultimateAttack = config.getString(uuid + ".ultimateAttack", null);
-            masterPlayerData.put(playerData.player, playerData);
+            JoinLeaveHandler.toAdd.put(UUID.fromString(uuid), playerData);
         }
 
     }

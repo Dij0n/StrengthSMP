@@ -21,7 +21,7 @@ public class RandomHandler implements Listener {
     }
 
     @EventHandler
-    public void onPlayerUse(PlayerInteractEvent event) {
+    public void onPlayerUseBook(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
 
@@ -33,12 +33,12 @@ public class RandomHandler implements Listener {
                 if (playerData.getBasicAttack() != null) {
                     String newBasicAttack = playerData.getDifferentBasicAttack();
                     playerData.setBasicAttack(newBasicAttack);
-                    player.sendMessage("Your basic attack has been rerolled to: " + newBasicAttack);
+                    player.sendMessage(ChatColor.GREEN + "Your basic attack has been rerolled to: " + ChatColor.DARK_GREEN + newBasicAttack);
                 }
-                if (playerData.getUltimateAttack() != null) {
+                if (playerData.strength == 3) {
                     String newUltimateAttack = playerData.getDifferentUltimateAttack();
                     playerData.setUltimateAttack(newUltimateAttack);
-                    player.sendMessage("Your ultimate attack has been rerolled to: " + newUltimateAttack);
+                    player.sendMessage(ChatColor.GREEN + "Your ultimate attack has been rerolled to: " + ChatColor.DARK_GREEN + newUltimateAttack);
                 }
 
                 item.setAmount(item.getAmount() - 1);

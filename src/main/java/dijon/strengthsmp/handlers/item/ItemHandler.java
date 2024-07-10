@@ -28,6 +28,12 @@ public class ItemHandler implements Listener {
             ItemMeta meta = item.getItemMeta();
             if(meta == null) return;
             if(meta.getCustomModelData() == 5) {
+
+                if(PlayerDataManager.getStrength(player) == 3){
+                    player.sendMessage(ChatColor.RED + "You cannot go above +3 strength");
+                    return;
+                }
+
                 PlayerDataManager.incStrength(player);
 
                 player.sendMessage(ChatColor.GREEN + "Your strength is now +" + PlayerDataManager.getStrength(player));

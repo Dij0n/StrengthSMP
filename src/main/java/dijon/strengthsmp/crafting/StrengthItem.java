@@ -1,8 +1,11 @@
 package dijon.strengthsmp.crafting;
 
 import dijon.strengthsmp.StrengthSMP;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -21,8 +24,10 @@ public class StrengthItem {
         strengthItem = new ItemStack(Material.GHAST_TEAR);
         ItemMeta meta = strengthItem.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName("Strength");
+            meta.setDisplayName(ChatColor.RED + "Strength");
             meta.setCustomModelData(5);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            meta.addEnchant(Enchantment.BINDING_CURSE,1 , true);
             strengthItem.setItemMeta(meta);
         }
         NamespacedKey key = new NamespacedKey(plugin, "strengthitem");

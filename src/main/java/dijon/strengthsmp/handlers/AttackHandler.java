@@ -25,8 +25,11 @@ public class AttackHandler implements Listener {
     @EventHandler
     public void onAttack(EntityDamageByEntityEvent e){
         if(e.getDamager() instanceof Player p){
+            Material itemInHand = p.getInventory().getItemInMainHand().getType();
+
+            if(!isSword(itemInHand)) return;
+
             PlayerDataManager.incHits(p);
-            p.sendMessage(String.valueOf(PlayerDataManager.getHits(p)));
         }
     }
 
