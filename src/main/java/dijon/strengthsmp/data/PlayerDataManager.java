@@ -3,6 +3,7 @@ package dijon.strengthsmp.data;
 import dijon.strengthsmp.StrengthSMP;
 import dijon.strengthsmp.handlers.JoinLeaveHandler;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -15,9 +16,9 @@ import java.util.UUID;
 
 public class PlayerDataManager {
 
-    public static final String[] BASIC_ATTACKS = new String[] { "Swift Strikes", "Slashes", "Double Strikes", "Uppercuts" };
+    public static final String[] BASIC_ATTACKS = new String[] { "Swift_Strikes", "Slashes", "Double_Strike", "Uppercut", "Zen_Throw" };
 
-    public static final String[] ULTIMATE_ATTACKS = new String[] { "Dragon Fists", "Reaping Claw", "Multi Strike", "Whirlwinds" };
+    public static final String[] ULTIMATE_ATTACKS = new String[] { "Dragon_Fists", "Reaping_Claw", "Multi_Strike", "Whirlwind", "Dragonborn", "Deadly_Squash" };
 
     public static HashMap<Player, PlayerData> masterPlayerData = new HashMap<>();
 
@@ -58,6 +59,31 @@ public class PlayerDataManager {
         masterPlayerData.get(p).lastUltActivation = System.currentTimeMillis();
     }
 
+    public static boolean getEgg(Player p){
+        return masterPlayerData.get(p).isDragonEgg();
+    }
+
+    public static void setEgg(Player p, boolean egg){
+        masterPlayerData.get(p).setDragonEgg(egg);
+    }
+
+    public static void dragonActivation(Player p){
+        masterPlayerData.get(p).setStrength(4);
+        masterPlayerData.get(p).setUltimateAttack("Dragon Strike");
+        masterPlayerData.get(p).setDragonEgg(true);
+        p.sendMessage(ChatColor.GREEN + "You found the Dragon Egg!");
+        p.sendMessage(ChatColor.GREEN + "Your new strength is " + ChatColor.DARK_GREEN + "+4");
+        p.sendMessage(ChatColor.GREEN + "Your new ultimate attack is " + ChatColor.DARK_GREEN + "Dragon Strike");
+    }
+
+    public static void dragonLoss(Player p){
+        masterPlayerData.get(p).setStrength(3);
+        masterPlayerData.get(p).setUltimateAttack(masterPlayerData.get(p).getRandomUltimateAttack());
+        masterPlayerData.get(p).setDragonEgg(false);
+        p.sendMessage(ChatColor.RED + "You lost the Dragon Egg!");
+        p.sendMessage(ChatColor.RED + "Your new strength is " + ChatColor.DARK_RED + "+3");
+        p.sendMessage(ChatColor.RED + "Your new ultimate attack is " + ChatColor.DARK_GREEN + masterPlayerData.get(p).getUltimateAttack());
+    }
 
 
 

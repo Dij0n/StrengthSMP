@@ -29,8 +29,8 @@ public class ItemHandler implements Listener {
             if(meta == null) return;
             if(meta.getCustomModelData() == 5) {
 
-                if(PlayerDataManager.getStrength(player) == 3){
-                    player.sendMessage(ChatColor.RED + "You cannot go above +3 strength");
+                if(PlayerDataManager.getStrength(player) >= 3){
+                    player.sendMessage(ChatColor.RED + "You cannot go above +3 strength with this item");
                     return;
                 }
 

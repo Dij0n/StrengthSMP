@@ -26,6 +26,8 @@ public class PlayerData {
 
     public double lastUltActivation;
 
+    public boolean dragonEgg = false;
+
     public PlayerData(Player player) {
         this.player = player;
         this.uuid = player.getUniqueId();
@@ -48,6 +50,7 @@ public class PlayerData {
     public void incStrength(){
         if(strength < 3){
             strength++;
+            player.sendMessage(ChatColor.GREEN + "Your new strength is +" + ChatColor.DARK_GREEN + strength);
         }
         if(strength == 3 && ultimateAttack == null){
             ultimateAttack = getRandomUltimateAttack();
@@ -57,7 +60,10 @@ public class PlayerData {
     }
 
     public void decStrength(){
-        if(strength > 1) strength--;
+        if(strength > 1){
+            strength--;
+            player.sendMessage(ChatColor.RED + "Your new strength is +" + ChatColor.DARK_RED + strength);
+        }
         if(strength != 3){
             ultimateAttack = null;
         }
@@ -99,6 +105,14 @@ public class PlayerData {
         this.ultimateAttack = ultimateAttack;
     }
 
+    public boolean isDragonEgg() {
+        return dragonEgg;
+    }
+
+    public void setDragonEgg(boolean dragonEgg) {
+        this.dragonEgg = dragonEgg;
+    }
+
     public String getRandomBasicAttack() {
         return PlayerDataManager.BASIC_ATTACKS[random.nextInt(PlayerDataManager.BASIC_ATTACKS.length)];
     }
@@ -117,9 +131,9 @@ public class PlayerData {
 
     public String getDifferentUltimateAttack(){
         String attack = ultimateAttack;
-        if(attack == null) attack = PlayerDataManager.ULTIMATE_ATTACKS[random.nextInt(PlayerDataManager.BASIC_ATTACKS.length)];
+        if(attack == null) attack = PlayerDataManager.ULTIMATE_ATTACKS[random.nextInt(PlayerDataManager.ULTIMATE_ATTACKS.length)];
         while(attack.equals(ultimateAttack)){
-            attack = PlayerDataManager.ULTIMATE_ATTACKS[random.nextInt(PlayerDataManager.BASIC_ATTACKS.length)];
+            attack = PlayerDataManager.ULTIMATE_ATTACKS[random.nextInt(PlayerDataManager.ULTIMATE_ATTACKS.length)];
         }
         return attack;
     }
