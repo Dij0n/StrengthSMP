@@ -25,6 +25,8 @@ public class RandomHandler implements Listener {
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
 
+        if(!event.getAction().isRightClick()) return;
+
         if (item != null && item.getType() == Material.BOOK && item.hasItemMeta()) {
             ItemMeta meta = item.getItemMeta();
             if(meta == null) return;
@@ -39,6 +41,9 @@ public class RandomHandler implements Listener {
                     String newUltimateAttack = playerData.getDifferentUltimateAttack();
                     playerData.setUltimateAttack(newUltimateAttack);
                     player.sendMessage(ChatColor.GREEN + "Your ultimate attack has been rerolled to: " + ChatColor.DARK_GREEN + newUltimateAttack);
+                }
+                if (playerData.strength == 4) {
+                    player.sendMessage(ChatColor.GREEN + "Your ultimate attack is still: " + ChatColor.DARK_GREEN + "Dragonborn");
                 }
 
                 item.setAmount(item.getAmount() - 1);

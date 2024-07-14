@@ -24,6 +24,8 @@ public class ItemHandler implements Listener {
         Player player = e.getPlayer();
         ItemStack item = e.getItem();
 
+        if(!e.getAction().isRightClick()) return;
+
         if (item != null && item.getType() == Material.GHAST_TEAR && item.hasItemMeta()) {
             ItemMeta meta = item.getItemMeta();
             if(meta == null) return;

@@ -18,7 +18,7 @@ public class PlayerDataManager {
 
     public static final String[] BASIC_ATTACKS = new String[] { "Swift_Strikes", "Slashes", "Double_Strike", "Uppercut", "Zen_Throw" };
 
-    public static final String[] ULTIMATE_ATTACKS = new String[] { "Dragon_Fists", "Reaping_Claw", "Multi_Strike", "Whirlwind", "Dragonborn", "Deadly_Squash" };
+    public static final String[] ULTIMATE_ATTACKS = new String[] { "Dragon_Fists", "Reaping_Claw", "Multi_Strike", "Whirlwind", "Deadly_Squash" };
 
     public static HashMap<Player, PlayerData> masterPlayerData = new HashMap<>();
 
@@ -60,6 +60,9 @@ public class PlayerDataManager {
     }
 
     public static boolean getEgg(Player p){
+        if(masterPlayerData.get(p) == null){
+            return false;
+        }
         return masterPlayerData.get(p).isDragonEgg();
     }
 
@@ -69,11 +72,11 @@ public class PlayerDataManager {
 
     public static void dragonActivation(Player p){
         masterPlayerData.get(p).setStrength(4);
-        masterPlayerData.get(p).setUltimateAttack("Dragon Strike");
+        masterPlayerData.get(p).setUltimateAttack("Dragonborn");
         masterPlayerData.get(p).setDragonEgg(true);
         p.sendMessage(ChatColor.GREEN + "You found the Dragon Egg!");
         p.sendMessage(ChatColor.GREEN + "Your new strength is " + ChatColor.DARK_GREEN + "+4");
-        p.sendMessage(ChatColor.GREEN + "Your new ultimate attack is " + ChatColor.DARK_GREEN + "Dragon Strike");
+        p.sendMessage(ChatColor.GREEN + "Your new ultimate attack is " + ChatColor.DARK_GREEN + "Dragonborn");
     }
 
     public static void dragonLoss(Player p){
@@ -112,6 +115,7 @@ public class PlayerDataManager {
             config.set(save.player.getUniqueId() + ".strength", save.strength);
             config.set(save.player.getUniqueId() + ".basicAttack", save.basicAttack);
             config.set(save.player.getUniqueId() + ".ultimateAttack", save.ultimateAttack);
+            config.set(save.player.getUniqueId() + ".dragon", save.dragonEgg);
         }
 
         try {
@@ -138,6 +142,7 @@ public class PlayerDataManager {
             playerData.strength = config.getInt(uuid + ".strength", 2);
             playerData.basicAttack = config.getString(uuid + ".basicAttack", playerData.getRandomBasicAttack());
             playerData.ultimateAttack = config.getString(uuid + ".ultimateAttack", null);
+            playerData.dragonEgg = Boolean.parseBoolean(config.getString(uuid + ".dragon", null));
             JoinLeaveHandler.toAdd.put(UUID.fromString(uuid), playerData);
         }
 

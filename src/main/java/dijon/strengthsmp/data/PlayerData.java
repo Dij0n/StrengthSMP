@@ -75,7 +75,10 @@ public class PlayerData {
         return this.strength;
     }
 
-    public void setStrength(int strength) { this.strength = strength;}
+    public void setStrength(int strength) {
+        this.strength = strength;
+        player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1 + strength);
+    }
 
     public int getPlayerHits() {
         return playerHits;

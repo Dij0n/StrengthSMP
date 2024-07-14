@@ -16,6 +16,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -63,6 +64,14 @@ public class DragonHandler implements Listener {
     @EventHandler
     public void itemDie(PlayerDeathEvent e){
         if(PlayerDataManager.getEgg(e.getPlayer())){
+            PlayerDataManager.dragonLoss(e.getPlayer());
+        }
+    }
+
+    @EventHandler
+    public void itemJoin(PlayerJoinEvent e){
+        Inventory inv = e.getPlayer().getInventory();
+        if(!inv.contains(Material.DRAGON_EGG) && PlayerDataManager.getEgg(e.getPlayer())){
             PlayerDataManager.dragonLoss(e.getPlayer());
         }
     }

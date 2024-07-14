@@ -33,8 +33,11 @@ public class StrengthItem {
         NamespacedKey key = new NamespacedKey(plugin, "strengthitem");
         recipe = new ShapedRecipe(key, strengthItem);
 
-        recipe.shape("DDD", "DDD", "DDD");
-        recipe.setIngredient('D', Material.DIAMOND_BLOCK);
+        recipe.shape("ENE", "HCH", "ENE");
+        recipe.setIngredient('E', Material.END_CRYSTAL);
+        recipe.setIngredient('N', Material.NETHERITE_INGOT);
+        recipe.setIngredient('H', Material.HEART_OF_THE_SEA);
+        recipe.setIngredient('C', Material.CONDUIT);
 
         getServer().addRecipe(recipe);
     }
