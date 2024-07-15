@@ -20,10 +20,7 @@ public class DKillHandler implements Listener {
     @EventHandler
     public void onEventKill(PlayerDeathEvent e){
         if(!DEventManager.eventActive) return;
-        //ADD WORLD CHECKER
-        //ADD WORLD CHECKER
-        //ADD WORLD CHECKER
-        //ADD WORLD CHECKER
+        if(!e.getPlayer().getWorld().equals(StationHandler.strengthWorld)) return;
 
         if(e.getPlayer().getKiller() != null){
 
@@ -33,7 +30,12 @@ public class DKillHandler implements Listener {
 
             int teamIndex = DEventManager.getTeamIndexByPlayer(e.getPlayer());
             StationHandler.chargeBatteryByIndex(teamIndex, -2);
-
+            DEventManager.teamMessage(DEventManager.teams.get(teamIndex),
+                    "§6Battery Discharged! "
+                            + "§e☣ "
+                            + "§c§o§l"
+                            + (int) StationHandler.stations.get(teamIndex).getChargeValue()
+                            + "%");
         }
     }
 

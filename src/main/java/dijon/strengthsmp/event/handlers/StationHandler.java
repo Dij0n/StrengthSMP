@@ -5,7 +5,9 @@ import dijon.strengthsmp.StrengthSMP;
 import dijon.strengthsmp.event.DEventManager;
 import dijon.strengthsmp.event.Station;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,24 +21,18 @@ public class StationHandler implements Listener {
 
     public static ArrayList<Station> stations = new ArrayList<>();
 
+    public static World strengthWorld;
+
     public StationHandler(StrengthSMP plugin) {
         this.plugin = plugin;
+        strengthWorld = Bukkit.getWorld("TEMPORARY GET THE NAME OF THE ACTUAL WORLD PLEASE!!!!!!!!");
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
-        //STATION INITIALIZER HERE
-        //STATION INITIALIZER HERE
-        //STATION INITIALIZER HERE
-        //STATION INITIALIZER HERE
-        //STATION INITIALIZER HERE
-        //STATION INITIALIZER HERE
+        initializeStations();
     }
 
     @EventHandler
     public void onStationClick(PlayerInteractEvent e){
-        //ADD WORLD CHECKER
-        //ADD WORLD CHECKER
-        //ADD WORLD CHECKER
-        //ADD WORLD CHECKER
-
+        if(!e.getPlayer().getWorld().equals(strengthWorld)) return;
 
         if(!DEventManager.eventActive) return;
         if(!e.getAction().isRightClick()) return;
@@ -50,6 +46,14 @@ public class StationHandler implements Listener {
         int stationIndex = stations.indexOf(s);
         stations.get(stationIndex).charge(2);
 
+
+
+        DEventManager.teamMessage(DEventManager.teams.get(stationIndex),
+                "§6Battery Charged! "
+                        + "§e\uD83D\uDDF2 " //Lightning emojis
+                        + "§c§o§l"
+                        + (int) stations.get(stationIndex).getChargeValue()
+                        + "%");
     }
 
     public static void chargeBatteryByIndex(int index, double chargeVal){
@@ -72,6 +76,21 @@ public class StationHandler implements Listener {
             }
         }
         return null;
+    }
+
+    private static void initializeStations(){
+        Station station1 = new Station(strengthWorld.getBlockAt(0, 0, 0), 0);
+        Station station2 = new Station(strengthWorld.getBlockAt(0, 0, 0), 0);
+        Station station3 = new Station(strengthWorld.getBlockAt(0, 0, 0), 0);
+        Station station4 = new Station(strengthWorld.getBlockAt(0, 0, 0), 0);
+        Station station5 = new Station(strengthWorld.getBlockAt(0, 0, 0), 0);
+        Station station6 = new Station(strengthWorld.getBlockAt(0, 0, 0), 0);
+        stations.add(station1);
+        stations.add(station2);
+        stations.add(station3);
+        stations.add(station4);
+        stations.add(station5);
+        stations.add(station6);
     }
 
 
