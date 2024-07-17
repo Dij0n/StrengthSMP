@@ -27,16 +27,15 @@ public class DKillHandler implements Listener {
             if(!DEventManager.onSameTeam(e.getPlayer(), e.getPlayer().getKiller())){
                 e.getPlayer().getWorld().dropItemNaturally(e.getPlayer().getLocation(), BatteryItem.battery);
             }
-
-            int teamIndex = DEventManager.getTeamIndexByPlayer(e.getPlayer());
-            StationHandler.chargeBatteryByIndex(teamIndex, -2);
-            DEventManager.teamMessage(DEventManager.teams.get(teamIndex),
-                    "§6Battery Discharged! "
-                            + "§e☣ "
-                            + "§c§o§l"
-                            + (int) StationHandler.stations.get(teamIndex).getChargeValue()
-                            + "%");
         }
+        int teamIndex = DEventManager.getTeamIndexByPlayer(e.getPlayer());
+        StationHandler.chargeBatteryByIndex(teamIndex, -2);
+        DEventManager.teamMessage(DEventManager.teams.get(teamIndex),
+                "§6Battery Discharged! "
+                        + "§e☣ "
+                        + "§c§o§l"
+                        + (int) StationHandler.stations.get(teamIndex).getChargeValue()
+                        + "%");
     }
 
 }

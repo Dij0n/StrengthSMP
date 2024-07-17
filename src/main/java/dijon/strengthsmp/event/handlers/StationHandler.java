@@ -4,10 +4,7 @@ package dijon.strengthsmp.event.handlers;
 import dijon.strengthsmp.StrengthSMP;
 import dijon.strengthsmp.event.DEventManager;
 import dijon.strengthsmp.event.Station;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,7 +22,7 @@ public class StationHandler implements Listener {
 
     public StationHandler(StrengthSMP plugin) {
         this.plugin = plugin;
-        strengthWorld = Bukkit.getWorld("TEMPORARY GET THE NAME OF THE ACTUAL WORLD PLEASE!!!!!!!!");
+        strengthWorld = Bukkit.getWorld("world");
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
         initializeStations();
     }
@@ -45,6 +42,9 @@ public class StationHandler implements Listener {
         Station s = getStationByBlock(e.getClickedBlock()); //Redundant but good for safety
         int stationIndex = stations.indexOf(s);
         stations.get(stationIndex).charge(2);
+
+        e.getItem().setAmount(e.getItem().getAmount() - 1);
+        e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.BLOCK_AMETHYST_BLOCK_RESONATE, 10.0F, 1.3F);
 
 
 
@@ -79,9 +79,9 @@ public class StationHandler implements Listener {
     }
 
     private static void initializeStations(){
-        Station station1 = new Station(strengthWorld.getBlockAt(0, 0, 0), 0);
-        Station station2 = new Station(strengthWorld.getBlockAt(0, 0, 0), 0);
-        Station station3 = new Station(strengthWorld.getBlockAt(0, 0, 0), 0);
+        Station station1 = new Station(strengthWorld.getBlockAt(802, 69, -2658), 0);
+        Station station2 = new Station(strengthWorld.getBlockAt(800, 69, -2658), 0);
+        Station station3 = new Station(strengthWorld.getBlockAt(798, 69, -2658), 0);
         Station station4 = new Station(strengthWorld.getBlockAt(0, 0, 0), 0);
         Station station5 = new Station(strengthWorld.getBlockAt(0, 0, 0), 0);
         Station station6 = new Station(strengthWorld.getBlockAt(0, 0, 0), 0);

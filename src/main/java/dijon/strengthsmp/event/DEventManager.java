@@ -56,6 +56,7 @@ public class DEventManager {
         team1.add(UUID.fromString("8ff75664-6afd-4b6f-9677-5d8120943f10")); //Flame
         team1.add(UUID.fromString("7e8a77ca-daf1-4224-ae1d-2df8bab1eccb")); //Cold
         team1.add(UUID.fromString("d893df7c-182a-4c4f-b332-933c9ec72208")); //Epax
+        team1.add(UUID.fromString("38bbb2fb-0ca0-448b-98c2-51ffb843a07e")); //Dijon for testing
         ArrayList<UUID> team2 = new ArrayList<>();
         team2.add(UUID.fromString("050adf1f-5e4c-4c52-8e4a-a54f31060dd9")); //Tai
         team2.add(UUID.fromString("373bf969-07fd-4459-a401-521ac52625d0")); //Salem

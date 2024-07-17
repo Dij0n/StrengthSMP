@@ -9,3 +9,5 @@ commands:
     usage: /attack
   basic:
     usage: /basic
+  startevent:
+    usage: /startevent
