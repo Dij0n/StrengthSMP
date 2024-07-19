@@ -36,6 +36,7 @@ public class DKillHandler implements Listener {
                         + "§c§o§l"
                         + (int) StationHandler.stations.get(teamIndex).getChargeValue()
                         + "%");
+        DEventManager.bossBars.get(teamIndex).setProgress(StationHandler.stations.get(teamIndex).getChargeValue() / 100);
     }
 
 }

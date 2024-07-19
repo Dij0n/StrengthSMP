@@ -1,7 +1,10 @@
 package dijon.strengthsmp.event;
 
+import dijon.strengthsmp.event.handlers.StationHandler;
 import org.bukkit.Bukkit;
-import org.bukkit.block.Block;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -12,6 +15,7 @@ public class DEventManager {
     public static boolean eventActive = false;
 
     public static ArrayList<ArrayList<UUID>> teams = new ArrayList<>();
+    public static ArrayList<BossBar> bossBars = new ArrayList<>();
 
     public DEventManager(){
         initializeTeams();
@@ -19,6 +23,7 @@ public class DEventManager {
 
     public static void start(){
         eventActive = true;
+        initializeBossBars();
     }
 
 
@@ -47,8 +52,22 @@ public class DEventManager {
         }
     }
 
+    public static void otherTeamMessage(ArrayList<UUID> otherteam, String s){
+        for(ArrayList<UUID> team : teams){
+            if(team.equals(otherteam)) continue;
+            for(UUID uuid : team){
+                if(Bukkit.getPlayer(uuid) == null) continue;
+                Bukkit.getPlayer(uuid).sendMessage(s);
+            }
+        }
+    }
+
     public static void batteryCharged(int teamIndex){
-        //END EVENT CODE HERE
+        for(BossBar bar : bossBars){
+            bar.setVisible(false);
+            bar.setProgress(0);
+        }
+        eventActive = false;
     }
 
     public void initializeTeams(){
@@ -93,6 +112,36 @@ public class DEventManager {
         teams.add(team4);
         teams.add(team5);
         teams.add(team6);
+    }
+
+    public static void initializeBossBars(){
+        bossBars = new ArrayList<>();
+        String title = "§e\uD83D\uDDF2 §6§lBattery §e\uD83D\uDDF2";
+        BossBar bar1 = Bukkit.createBossBar(title, BarColor.YELLOW, BarStyle.SEGMENTED_10);
+        BossBar bar2 = Bukkit.createBossBar(title, BarColor.YELLOW, BarStyle.SEGMENTED_10);
+        BossBar bar3 = Bukkit.createBossBar(title, BarColor.YELLOW, BarStyle.SEGMENTED_10);
+        BossBar bar4 = Bukkit.createBossBar(title, BarColor.YELLOW, BarStyle.SEGMENTED_10);
+        BossBar bar5 = Bukkit.createBossBar(title, BarColor.YELLOW, BarStyle.SEGMENTED_10);
+        BossBar bar6 = Bukkit.createBossBar(title, BarColor.YELLOW, BarStyle.SEGMENTED_10);
+        bossBars.add(bar1);
+        bossBars.add(bar2);
+        bossBars.add(bar3);
+        bossBars.add(bar4);
+        bossBars.add(bar5);
+        bossBars.add(bar6);
+
+        reloadBossBars();
+    }
+
+    public static void reloadBossBars(){
+        for(BossBar bar : bossBars){
+            bar.setVisible(true);
+            bar.setProgress(StationHandler.stations.get(bossBars.indexOf(bar)).chargeValue / 100);
+            for(UUID uuid : teams.get(bossBars.indexOf(bar))){
+                if(Bukkit.getPlayer(uuid) == null) continue;
+                bar.addPlayer(Bukkit.getPlayer(uuid));
+            }
+        }
     }
 
 }

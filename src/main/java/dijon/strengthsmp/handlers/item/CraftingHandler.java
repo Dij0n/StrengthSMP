@@ -6,6 +6,7 @@ import dijon.strengthsmp.data.PlayerData;
 import dijon.strengthsmp.data.PlayerDataManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,7 +25,8 @@ public class CraftingHandler implements Listener {
 
     @EventHandler
     public void onCraft(CraftItemEvent e){
-        if(e.getRecipe().equals(StrengthItem.recipe)){
+        if(e.getCurrentItem() == null) return;
+        if(e.getCurrentItem().getType().equals(Material.GHAST_TEAR)){
             int strength = PlayerDataManager.getStrength((Player) e.getWhoClicked());
             if(strength != 1){
                 e.getWhoClicked().sendMessage(ChatColor.RED + "You can only craft Strength on +1");

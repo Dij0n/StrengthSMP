@@ -18,7 +18,7 @@ public class strength implements CommandExecutor {
                 PlayerData playerData = PlayerDataManager.getPlayerData(player);
 
 
-                player.sendMessage(ChatColor.GREEN + "Your current strength is: " + ChatColor.DARK_GREEN + playerData.getStrength());
+                player.sendMessage(ChatColor.GREEN + "Your current strength is: " + ChatColor.DARK_GREEN + "+" + playerData.getStrength());
                 player.sendMessage(ChatColor.GREEN + "Your current basic attack is: " + ChatColor.DARK_GREEN + playerData.getBasicAttack());
                 if(playerData.getUltimateAttack() == null){
                     player.sendMessage(ChatColor.RED + "You do not have an Ultimate attack");
@@ -39,7 +39,7 @@ public class strength implements CommandExecutor {
             if(!args[0].equals("set")) return true;
             if(player.isOp()){
                 PlayerDataManager.setStrength(player, strength);
-                player.sendMessage(ChatColor.GREEN + "Your strength is now +" + strength);
+                player.sendMessage(ChatColor.GREEN + "Your strength is now" + ChatColor.DARK_GREEN + "+" + strength);
             }else{
                 sender.sendMessage(ChatColor.RED + "Only Opped players can set strength");
             }

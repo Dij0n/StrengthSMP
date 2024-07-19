@@ -18,8 +18,6 @@ public class JoinLeaveHandler implements Listener {
 
     StrengthSMP plugin;
 
-    public static HashMap<UUID, PlayerData> toAdd = new HashMap<>();
-
     public JoinLeaveHandler(StrengthSMP plugin) {
         this.plugin = plugin;
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
@@ -28,14 +26,13 @@ public class JoinLeaveHandler implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
-        PlayerDataManager.addPlayer(e.getPlayer());
+        Bukkit.getLogger().info("Adding player");
 
-        UUID uuid = e.getPlayer().getUniqueId();
-
-        if(toAdd.containsKey(uuid)){
-            toAdd.get(uuid).player = e.getPlayer();
-            PlayerDataManager.addPlayer(toAdd.get(uuid));
-            toAdd.remove(uuid);
+        if(!PlayerDataManager.masterPlayerData.containsKey(e.getPlayer().getUniqueId())){
+            PlayerDataManager.addPlayer(e.getPlayer());
+            PlayerDataManager.setPlayer(e.getPlayer());
+        }else{
+            PlayerDataManager.setPlayer(e.getPlayer());
         }
 
         PlayerDataManager.savePlayers();

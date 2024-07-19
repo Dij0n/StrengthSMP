@@ -15,17 +15,17 @@ public class MythicHandler {
         if(Arrays.stream(PlayerDataManager.BASIC_ATTACKS).toList().contains(s)){
             MythicBukkit.inst().getAPIHelper().castSkill(p, s, p, p.getLocation(), null, null, 1.0F);
         }else {
-            p.sendMessage(ChatColor.RED + "[Debug] LOSER!!!!!!!!!!!!!!!!!!!");
+            p.sendMessage(ChatColor.RED + "[Debug] Attack not found. Please reroll");
         }
 
     }
 
     public static void mythicUltimateAttack(Player p, String s){
 
-        if(Arrays.stream(PlayerDataManager.ULTIMATE_ATTACKS).toList().contains(s)){
+        if(Arrays.stream(PlayerDataManager.ULTIMATE_ATTACKS).toList().contains(s) || s.equals("Dragonborn")){
             MythicBukkit.inst().getAPIHelper().castSkill(p, s, p, p.getLocation(), null, null, 1.0F);
         }else {
-            p.sendMessage(ChatColor.RED + "[Debug] LOSER!!!!!!!!!!!!!!!!!!!");
+            p.sendMessage(ChatColor.RED + "[Debug] Attack not found. Please reroll");
         }
 
     }

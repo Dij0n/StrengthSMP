@@ -12,6 +12,10 @@ public class UltimateHandler {
 
     public static void ultimateAttack(Player p){
         PlayerData save = PlayerDataManager.getPlayerData(p);
+        if(save.strength < 3){
+            p.sendMessage(ChatColor.RED + "You do not have enough strength to use an ultimate attack");
+            return;
+        }
         if(System.currentTimeMillis() - save.lastUltActivation < 10000){
             int timeLeft = (int) ((10000 - (System.currentTimeMillis() - save.lastUltActivation)) / 1000);
             p.sendMessage(ChatColor.RED + "Cooling down... " + ChatColor.BOLD + timeLeft + "s");

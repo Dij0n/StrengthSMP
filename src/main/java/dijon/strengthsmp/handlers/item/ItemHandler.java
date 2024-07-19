@@ -35,10 +35,7 @@ public class ItemHandler implements Listener {
                     player.sendMessage(ChatColor.RED + "You cannot go above +3 strength with this item");
                     return;
                 }
-
                 PlayerDataManager.incStrength(player);
-
-                player.sendMessage(ChatColor.GREEN + "Your strength is now +" + PlayerDataManager.getStrength(player));
 
                 item.setAmount(item.getAmount() - 1);
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F);

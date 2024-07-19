@@ -50,7 +50,7 @@ public class PlayerData {
     public void incStrength(){
         if(strength < 3){
             strength++;
-            player.sendMessage(ChatColor.GREEN + "Your new strength is +" + ChatColor.DARK_GREEN + strength);
+            player.sendMessage(ChatColor.GREEN + "Your new strength is " + ChatColor.DARK_GREEN + "+" + strength);
         }
         if(strength == 3 && ultimateAttack == null){
             ultimateAttack = getRandomUltimateAttack();
@@ -62,10 +62,7 @@ public class PlayerData {
     public void decStrength(){
         if(strength > 1){
             strength--;
-            player.sendMessage(ChatColor.RED + "Your new strength is +" + ChatColor.DARK_RED + strength);
-        }
-        if(strength != 3){
-            ultimateAttack = null;
+            player.sendMessage(ChatColor.RED + "Your new strength is " + ChatColor.DARK_RED + "+" + strength);
         }
         player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1 + strength);
     }
@@ -78,6 +75,10 @@ public class PlayerData {
     public void setStrength(int strength) {
         this.strength = strength;
         player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1 + strength);
+    }
+
+    public void setPlayer(Player p) {
+        this.player = p;
     }
 
     public int getPlayerHits() {

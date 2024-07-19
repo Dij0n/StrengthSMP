@@ -1,4 +1,4 @@
-package dijon.strengthsmp.handlers;
+package dijon.strengthsmp.handlers.item;
 
 import dijon.strengthsmp.StrengthSMP;
 import dijon.strengthsmp.data.PlayerData;
@@ -47,7 +47,7 @@ public class RandomHandler implements Listener {
                 }
 
                 item.setAmount(item.getAmount() - 1);
-                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F);
+                player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F);
                 player.getWorld().spawnParticle(Particle.DUST, player.getLocation(), 100, 0.5D, 0.5D, 0.5D, new Particle.DustOptions(Color.RED, 1.0F));
             }
         }

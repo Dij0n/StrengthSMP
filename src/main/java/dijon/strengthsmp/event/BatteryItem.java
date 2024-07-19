@@ -20,9 +20,10 @@ public class BatteryItem implements Listener {
 
 
     public static void initailizeItem(){
+        String title = "§e\uD83D\uDDF2 §6§lBattery §e\uD83D\uDDF2";
         battery = new ItemStack(Material.BLACK_CANDLE);
         ItemMeta meta = battery.getItemMeta();
-        meta.setDisplayName(ChatColor.YELLOW + "Battery");
+        meta.setDisplayName(title);
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.BLUE + "Deposit this at spawn to charge your team's battery!");
         meta.setLore(lore);

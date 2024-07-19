@@ -11,3 +11,5 @@ commands:
     usage: /basic
   startevent:
     usage: /startevent
+  tpstrength:
+    usage: /tpstrength
