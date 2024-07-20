@@ -2,6 +2,7 @@ package dijon.strengthsmp.event;
 
 import dijon.strengthsmp.event.handlers.StationHandler;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
@@ -67,6 +68,12 @@ public class DEventManager {
             bar.setVisible(false);
             bar.setProgress(0);
         }
+        for(Player p : Bukkit.getOnlinePlayers()){
+            p.sendMessage("§e\uD83D\uDDF2 §6" + StationHandler.stations.get(teamIndex).getTeamname() + "'s battery is fully charged!");
+            p.sendMessage(ChatColor.DARK_RED + "✦ The Portal has been opened!");
+        }
+        //Open portal code here
+        //Send Trial Chamber coords here
         eventActive = false;
     }
 

@@ -7,8 +7,6 @@ commands:
     usage: /strength
   attack:
     usage: /attack
-  basic:
-    usage: /basic
   startevent:
     usage: /startevent
   tpstrength:

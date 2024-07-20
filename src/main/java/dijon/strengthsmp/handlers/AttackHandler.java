@@ -28,6 +28,8 @@ public class AttackHandler implements Listener {
             Material itemInHand = p.getInventory().getItemInMainHand().getType();
 
             if(!isSword(itemInHand)) return;
+            if(p.getAttackCooldown() != 1.0) return; //Fully charged attacks only
+            if(PlayerDataManager.getStrength(p) == 1) return; //No basic attacks on +1
 
             PlayerDataManager.incHits(p);
         }

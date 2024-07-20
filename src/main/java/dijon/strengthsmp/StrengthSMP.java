@@ -49,7 +49,7 @@ public final class StrengthSMP extends JavaPlugin {
         //COMMANDS
         this.getCommand("strength").setExecutor(new strength());
         this.getCommand("attack").setExecutor(new attack());
-        this.getCommand("basic").setExecutor(new basic());
+        //this.getCommand("basic").setExecutor(new basic());
         this.getCommand("startevent").setExecutor(new startevent());
         this.getCommand("tpstrength").setExecutor(new tpstrength());
 

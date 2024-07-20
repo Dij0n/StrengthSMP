@@ -12,7 +12,7 @@ public class tpstrength implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         Player player = (Player) commandSender;
-
+        if(!player.isOp()) return true;
         Location loc = new Location(StationHandler.strengthWorld, player.getX(), player.getY(), player.getZ());
         player.teleport(loc);
         return false;

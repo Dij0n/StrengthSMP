@@ -16,6 +16,7 @@ public class startevent implements CommandExecutor {
             if(!player.isOp()) return true;
             DEventManager.start();
         }
+
         return true;
     }
 
