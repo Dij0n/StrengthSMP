@@ -50,7 +50,9 @@ public class AttackHandler implements Listener {
             }
         }else{
             ItemStack item = StrengthItem.strengthItem;
-            victim.getWorld().dropItemNaturally(victim.getLocation(), item);
+            if(victimData.getStrength() != 1){
+                victim.getWorld().dropItemNaturally(victim.getLocation(), item);
+            }
         }
         victimData.decStrength();
 
