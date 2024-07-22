@@ -10,6 +10,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.ArrayList;
@@ -48,5 +49,21 @@ public class JoinLeaveHandler implements Listener {
     @EventHandler
     public void onLeave(PlayerQuitEvent e){
         PlayerDataManager.savePlayers();
+    }
+
+    @EventHandler
+    public void onDimensionLeave(PlayerPortalEvent e){
+        if(e.getPlayer().getWorld().equals(StationHandler.strengthWorld)){
+            e.setCancelled(true);
+            e.getPlayer().teleport(new Location(Bukkit.getWorld("world"), 2, 129, -33));
+            return;
+        }
+        if(e.getPlayer().getWorld().equals(Bukkit.getWorld("world"))){
+            if(e.getPlayer().getLocation().distance(new Location(Bukkit.getWorld("world"), -1, 130, -33)) <= 12){
+                e.setCancelled(true);
+                e.getPlayer().teleport(new Location(StationHandler.strengthWorld, -157, 110, 123));
+                return;
+            }
+        }
     }
 }

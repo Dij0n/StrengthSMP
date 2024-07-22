@@ -32,5 +32,8 @@ public class Station {
 
     public void charge(double chargeValue) {
         this.chargeValue += chargeValue;
+        if(this.chargeValue < 0){
+            this.chargeValue = 0;
+        }
     }
 }

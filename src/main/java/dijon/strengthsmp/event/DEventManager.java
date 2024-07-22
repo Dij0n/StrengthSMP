@@ -3,6 +3,7 @@ package dijon.strengthsmp.event;
 import dijon.strengthsmp.event.handlers.StationHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
@@ -24,6 +25,14 @@ public class DEventManager {
 
     public static void start(){
         eventActive = true;
+        for(Player p : Bukkit.getOnlinePlayers()){
+            p.sendMessage("§6The Portal has been summoned! "
+                    + "§e\uD83D\uDDF2 " //Lightning emojis
+                    + "§b§l"
+                    + "Charge your team's batteries at -300, 300. First team to 100% wins.");
+            p.sendMessage("§c§oGood Luck!");
+            p.playSound(p, Sound.ENTITY_LIGHTNING_BOLT_IMPACT, 10, 1);
+        }
         initializeBossBars();
     }
 
@@ -70,7 +79,8 @@ public class DEventManager {
         }
         for(Player p : Bukkit.getOnlinePlayers()){
             p.sendMessage("§e\uD83D\uDDF2 §6" + StationHandler.stations.get(teamIndex).getTeamname() + "'s battery is fully charged!");
-            p.sendMessage(ChatColor.DARK_RED + "✦ The Portal has been opened!");
+            p.sendMessage(ChatColor.DARK_RED + "✦ The Portal has been opened! " + "§c§o§l-180 120");
+            p.playSound(p, Sound.ENTITY_LIGHTNING_BOLT_IMPACT, 10, 1);
         }
         //Open portal code here
         //Send Trial Chamber coords here

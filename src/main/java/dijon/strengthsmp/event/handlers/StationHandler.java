@@ -98,12 +98,12 @@ public class StationHandler implements Listener {
     }
 
     private static void initializeStations(){
-        Station station1 = new Station(strengthWorld.getBlockAt(813, 158, -2582), 0, "The Tridents");
-        Station station2 = new Station(strengthWorld.getBlockAt(815, 158, -2582), 0, "The Monarchs");
-        Station station3 = new Station(strengthWorld.getBlockAt(817, 158, -2582), 0, "The Insurrection");
-        Station station4 = new Station(strengthWorld.getBlockAt(813, 158, -2577), 0, "Super Duper Epic");
-        Station station5 = new Station(strengthWorld.getBlockAt(815, 158, -2577), 0, "The Order");
-        Station station6 = new Station(strengthWorld.getBlockAt(817, 158, -2577), 0, "B.O.T.S");
+        Station station1 = new Station(strengthWorld.getBlockAt(-273, 120, 294), 0, "The Tridents");
+        Station station2 = new Station(strengthWorld.getBlockAt(-273, 120, 297), 0, "The Monarchs");
+        Station station3 = new Station(strengthWorld.getBlockAt(-300, 120, 323), 0, "The Insurrection");
+        Station station4 = new Station(strengthWorld.getBlockAt(-302, 120, 323), 0, "Super Duper Epic");
+        Station station5 = new Station(strengthWorld.getBlockAt(-328, 120, 296), 0, "The Order");
+        Station station6 = new Station(strengthWorld.getBlockAt(-328, 120, 294), 0, "B.O.T.S");
         stations.add(station1);
         stations.add(station2);
         stations.add(station3);
